@@ -1,3 +1,4 @@
+.cus-agent
 .venv/
 .env
 __pycache__/
