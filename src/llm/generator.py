@@ -1,15 +1,11 @@
+from src.memory.memory import format_history
 from google import genai
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
-client = genai.Client()
-
-MODEL_NAME = "gemini-3.8-flash"
-
-
-def generate_response(question, context):
+def generate_response(sessionID, question, context):
 
     prompt = f"""
 You are a helpful customer support agent.
@@ -19,6 +15,9 @@ in the context below.
 
 If the answer cannot be found in the context, say that you don't
 have enough information and recommend contacting customer support.
+
+History:
+{format_history(sessionID)}
 
 Context:
 {context}
@@ -35,17 +34,3 @@ Customer question:
     )
 
     return interaction.output_text
-
-question = "Can I return a laptop after 5 days?"
-
-context = """
-Customers can request a return within 7 days of receiving an item.
-The item must be unused and in its original packaging.
-Some products may not be eligible for return because of hygiene
-or safety restrictions.
-"""
-
-
-response = generate_response(question, context)
-
-print(response)
