@@ -1,4 +1,4 @@
-def search(query, model, index, chunks, k=10):
+def search(query, model, index, chunks, k=5):
     query = model.encode_query(query)
     query = query.reshape(1, -1)
     distances, indices = index.search(query, k)

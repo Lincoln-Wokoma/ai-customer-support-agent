@@ -20,6 +20,15 @@ class ChatRequest(BaseModel):
     session_id : str
     question : str
 
-@app.post("/chat")
+class Answerequest(BaseModel):
+    answer : str
+    session_id : str
+
+@app.post("/chat", response_model=Answerequest)
 def chat(request : ChatRequest):
-    return answer_question(request.question, request.session_id)
+    answer = answer_question(request.question, request.session_id)
+    return Answerequest(
+        answer = answer,
+        session_id = request.session_id
+    )
+
