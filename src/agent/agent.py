@@ -1,11 +1,10 @@
+from src.retrieval.setup import model, chunks, index
 from src.retrieval.search import search
 from src.llm.generator import generate_response
 from src.memory.memory import add_message
 
 
-def answer_question(question, model, index, chunks):
-
-    sessionID = "S001"
+def answer_question(question, sessionID):
 
     add_message(sessionID,"customer", question)
 
